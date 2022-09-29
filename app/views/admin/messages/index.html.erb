@@ -1,0 +1,23 @@
+<h1> List of messages </h1>
+
+<table id="vaseem">
+	<tr>
+		<th>Message sender's Name</th>
+		<th>Created at</th>
+		<th>Action<th>
+	</tr>
+	 <%@messages.each do |message| %>
+		<tr>
+			<td>
+				<%=message.full_name%>
+			</td>
+			<td>
+				<%="#{time_ago_in_words(message.created_at)} ago"%>
+			</td>
+			
+		  <td>
+		  	<%=link_to "Show message deatils", admin_message_path(message)%>
+		  </td>
+		</tr>
+	<%end%>
+</table>

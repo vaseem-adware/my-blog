@@ -1,0 +1,20 @@
+<h1> List of Tags</h1>
+
+<table id="vaseem">
+	<tr>
+		<th>Tag Name</th>
+		<th>Created at</th>
+		
+	</tr>
+	 <%@tags.each do |tag| %>
+		<tr>
+			<td>
+				<%=tag.name%>
+			</td>
+			<td>
+				<%="#{time_ago_in_words(tag.created_at)} ago"%>
+			</td>
+			
+		</tr>
+	<%end%>
+</table>

@@ -1,0 +1,13 @@
+
+<%=form_for [:admin, @post] do |f|%>
+  <%= f.hidden_field :user_id, value: @user.id %>
+	<div>
+		<%=f.label :Title%><br>
+		<%=f.text_field :title%>
+	</div>
+	<div>
+		<%=f.label :Content%><br>
+		<%=f.text_area :content%>
+	</div>
+	<%=f.submit%>
+<%end%>

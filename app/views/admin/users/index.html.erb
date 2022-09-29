@@ -1,0 +1,28 @@
+<h1>List of users</h1>
+<%= link_to "Create new user", new_admin_user_path%>
+
+<table id="vaseem">
+  <tr>
+    <th>Name</th>
+    <th>About</th>
+    <th>Email</th>
+    <th>Created at</th>
+    <th>Actions</th>
+  </tr>
+  <%@users.each do |user|%>
+	  <tr>
+	    <td><%= "#{user.first_name}" + " " + "#{user.last_name}" %></td>
+	    <td>
+	    	<%=user.about.truncate(50)%>
+	    </td>
+	    <td><%= user.email %></td>
+	    <td><%= "#{time_ago_in_words(user.created_at)} ago" %></td>
+	    <td>
+	    	<%= link_to "Show full details", admin_user_path(user) %>
+	    	<%= link_to "Edit User", edit_admin_user_path(user)%>
+
+	    </td>
+	  </tr>
+
+	<%end%>
+</table>

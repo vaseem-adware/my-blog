@@ -1,0 +1,37 @@
+<h1>Post List</h1>
+<%=link_to "Create A New Post", new_admin_post_path%>
+
+<table id="vaseem">
+	<tr>
+		<th>Title</th>
+		<th>Content</th>
+		<th>Published?</th>
+		<th>Post by</th>
+		<th>Created </th>
+		<th>Action</th>
+  </tr>
+  <%@posts.each do |post|%>
+  <tr>
+  	
+  	<td>
+  		<%=post.title%>
+  	</td>
+  	<td>
+  		<%=post.content.truncate(50)%>
+  	</td>
+  	<td>
+  		<%=post.is_publish%>
+  	</td>
+  	<td>
+  		<%=post.user.first_name%>
+  	</td>
+  	<td>
+  		<%="#{time_ago_in_words(post.created_at)} ago"%> ago
+  	</td>
+  	<td>
+  		<%=link_to "Show Post Details", admin_post_path(post)%>
+      <%=link_to "Edit Post", edit_admin_post_path(post)%>
+  	</td>
+  	<%end%>
+  </tr>
+</table>
