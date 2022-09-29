@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, except: :destroy
-    resources :posts 
+    resources :posts
     resources :messages, only: [:index, :show]
     resources :tags
     resources :sessions, only: [:new, :create]

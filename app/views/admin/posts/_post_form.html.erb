@@ -9,5 +9,10 @@
 		<%=f.label :Content%><br>
 		<%=f.text_area :content%>
 	</div>
+	<div>
+		<br>
+	<%= f.select :tag_ids, Tag.all.collect { |t| [t.name, t.id]}, {prompts: "Select a tag"}, id: "tag_select", multiple: 'multiple' %>
+	</div>
+
 	<%=f.submit%>
 <%end%>
