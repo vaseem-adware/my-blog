@@ -12,9 +12,10 @@
 				<%=tag.name%>
 			</td>
 			<td>
-				<%="#{time_ago_in_words(tag.created_at)} ago"%>
+				<%=time_ago tag.created_at%>
 			</td>
 			
 		</tr>
 	<%end%>
 </table>
+<%= will_paginate @messages%>

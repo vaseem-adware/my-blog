@@ -1,4 +1,6 @@
-<%= form_for [:admin, @user] do |f| %>
+<%= form_for [:admin, user] do |f| %>
+
+	<%= render "layouts/validation_form", obj: @user%>
 	<div>
 		<%=f.label :First_Name%><br>
 		<%=f.text_field :first_name%>
@@ -14,6 +16,10 @@
 	<div>
 		<%=f.label :Email%><br>
 		<%=f.email_field :email%>
+	</div>
+	<div>
+		<%=f.label :Password%><br>
+		<%=f.password_field :password%>
 	</div>
 	<div>
 		<%=f.submit%>

@@ -3,6 +3,7 @@ class Admin::PostsController < Admin::ApplicationController
 
   def index
     @posts = Post.all
+    @posts =Post.paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -10,19 +11,25 @@ class Admin::PostsController < Admin::ApplicationController
   end
 
   def create
-    @post = Post.new(user_params)
+    @post = Post.new(post_params)
     if @post.save
       redirect_to admin_post_path(@post)
+    else
+      render "new"
     end
   end
 
-  def show;end
+  def show
+    @tags = @post.tags
+  end
 
   def edit;end
 
   def update
     if @post.update(post_params)
       redirect_to admin_post_path(@post)
+    else
+      render "edit"
     end
     
   end

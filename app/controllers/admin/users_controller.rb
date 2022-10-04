@@ -1,7 +1,8 @@
 class Admin::UsersController < Admin::ApplicationController
- 
+	
 	def index
 		@users = User.all
+		@users = User.paginate(page: params[:page], per_page: 5)
 	end
 
 	def show
@@ -9,7 +10,6 @@ class Admin::UsersController < Admin::ApplicationController
 	end
 
 	def new
-		
 		@user = User.new
 		
 	end
@@ -18,6 +18,8 @@ class Admin::UsersController < Admin::ApplicationController
 		@user = User.new(user_params)
 			if @user.save
 				redirect_to  admin_user_path(@user)
+			else
+				render "new"
 			end
 
 	end
@@ -38,7 +40,7 @@ class Admin::UsersController < Admin::ApplicationController
 	private
 
 		def user_params
-			params.require(:user).permit(:first_name, :last_name, :email, :about, :password)
+			params.require(:user).permit(:first_name,:last_name,:email,:about, :password)
 		end
 
 end

@@ -20,13 +20,13 @@
   		<%=post.content.truncate(50)%>
   	</td>
   	<td>
-  		<%=post.is_publish%>
+  		<%=status_converter post.is_publish, truthy: "Published", falsy: "Not published"%>
   	</td>
   	<td>
   		<%=post.user.first_name%>
   	</td>
   	<td>
-  		<%="#{time_ago_in_words(post.created_at)} ago"%> ago
+  		<%=time_ago post.created_at%>
   	</td>
   	<td>
   		<%=link_to "Show Post Details", admin_post_path(post)%>
@@ -35,3 +35,4 @@
   	<%end%>
   </tr>
 </table>
+<%= will_paginate @posts%>

@@ -3,14 +3,19 @@
 	<tr>
 		<th>Title</th>
 		<th>Content</th>
+		<th>Tags</th>
 	</tr>
 	<tr>
 		<td>
 		  <%=@post.title%>
 		</td>
 		<td>
-			<%=@post.content%>
+			<%=@post.content.truncate(50)%>
 		</td>
-
+		<td>
+			<%@tags.each do |tag|%>
+				<%=tag.name%>, 
+			<%end%>
+		</td>
 	</tr>
 </table>

@@ -1,5 +1,13 @@
-
 <%=form_for [:admin, @post] do |f|%>
+  <%if @post.errors.any?%>
+  	<div>
+  		<ul>
+  			<%@post.errors.each do |error|%>
+  				<li><%=error.full_message%></li>
+  			<%end%>
+  		</ul>
+  	</div>
+  <%end%>
   <%= f.hidden_field :user_id, value: @user.id %>
 	<div>
 		<%=f.label :Title%><br>
@@ -11,7 +19,7 @@
 	</div>
 	<div>
 		<br>
-	<%= f.select :tag_ids, Tag.all.collect { |t| [t.name, t.id]}, {prompts: "Select a tag"}, id: "tag_select", multiple: 'multiple' %>
+	<%= f.select :tag_ids, Tag.all.collect { |t| [t.name, t.id]}, {prompt: "Select a Tag"},  id: "tag_select", multiple: 'multiple' %>
 	</div>
 
 	<%=f.submit%>
