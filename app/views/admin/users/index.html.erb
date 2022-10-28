@@ -4,6 +4,7 @@
 <table id="vaseem">
   <tr>
     <th>Name</th>
+    <th>Thumbnail</th>
     <th>About</th>
     <th>Email</th>
     <th>Created at</th>
@@ -12,6 +13,9 @@
   <%@users.each do |user|%>
 	  <tr>
 	    <td><%= "#{user.first_name}" + " " + "#{user.last_name}" %></td>
+	    <td>
+	    	<%=image_tag(user.avatar_url(:thumb).to_s)%>
+	    </td>
 	    <td>
 	    	<%=user.about.truncate(50)%>
 	    </td>

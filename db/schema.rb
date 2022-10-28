@@ -10,16 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_26_063623) do
+ActiveRecord::Schema.define(version: 2022_10_14_095102) do
 
   create_table "comments", force: :cascade do |t|
     t.string "full_name"
     t.string "email"
     t.text "message"
-    t.boolean "status"
     t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "status", default: false
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -51,6 +62,11 @@ ActiveRecord::Schema.define(version: 2022_09_26_063623) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_publish", default: false
+    t.string "intro"
+    t.string "image"
+    t.string "slug"
+    t.integer "page_view", default: 0
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
   end
 
   create_table "settings", force: :cascade do |t|
@@ -59,6 +75,7 @@ ActiveRecord::Schema.define(version: 2022_09_26_063623) do
     t.boolean "if_maintenance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "about"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -75,6 +92,7 @@ ActiveRecord::Schema.define(version: 2022_09_26_063623) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "avatar"
   end
 
 end

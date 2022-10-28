@@ -1,0 +1,84 @@
+<div class="container my-5">
+    <div class="row">
+      <div class="mx-auto col-md-8 text-secondary text-center">
+        <h1 class="font-weight-bold text-dark"><%=@post.title%></h1>
+        <div class="my-3 d-flex align-items-center author-block">
+          <div class="d-flex align-items-center">
+          <%=image_tag(@post.user.avatar_url(:thumb).to_s)%>
+          <small class="ml-2">
+            <a href="#" class="d-block aname"><%= "#{@post.user.first_name} #{@post.user.last_name}"%></a>
+          </small>
+        </div>
+        <div class="blog-posting-time">
+          <small><%=@post.created_at.strftime('%d %B %Y')%></small>
+        </div>
+        <div class="text-primary social-icons">
+           <a href="/#" class="mx-1">
+             <i class="fa fa-twitter"></i>
+           </a>
+           <a href="/#" class="w-6 mx-1">
+             <i class="fa fa-facebook"></i>
+           </a>
+           <a href="/#" class="w-6 mx-1">
+             <i class="fa fa-linkedin"></i>
+           </a>
+        </div>
+        </div>
+      </div>
+      <div class="mx-auto col-md-8">
+        <%= image_tag(@post.image_url.to_s, class: 'w-100 my-3') %>
+      </div>
+    </div>  
+    <div style="max-width: 700px; top: -80px;" class="mx-auto text-secondary">
+      <p class="my-2" style="line-height: 2;"><%=@post.content.html_safe%></p>    
+      <div class="my-3">
+        <small>
+            <%@post.tags.each do |tag|%>
+              <a href="#" class="text-primary">#<%=tag.name%></a>
+            <%end%>
+        </small>
+      </div>
+      
+    </div>
+  </div>
+  <div class="container" id="comments">
+    <div class="row">
+      <div class="col-md-7 mx-auto">
+        <div class="block">
+          <div class="block-header">
+            <div class="title">
+              <h2>Comments (<%=@comments.count%>)</h2>
+            </div>
+          </div>
+          <div class="writing">
+            <textarea class="comment-input", placeholder="Write your comment"></textarea>
+            <div class="footer">
+              <div class="group-button">
+                <button class="btn"><i class="ri-at-line"></i></button>
+                <button class="btn primary">Send</button>
+              </div>
+            </div>
+          </div>
+          
+         
+          <div class="comment">
+          <%@comments.each do |comment|%>
+            <div class="user-banner">
+              <div class="user">
+                <div class="init-avatar avatar"><%=comment.full_name[0]%></div>
+                  <h5><%=comment.full_name%></h5>
+              </div>
+              <button class="btn dropdown"><i class="ri-more-line"></i></button>
+            </div>
+            <div class="content">
+              <p><%=comment.message%></p>
+            </div>
+            <div class="footer">
+              <span class="is-mute"><%=comment.created_at.strftime('%d %B %Y')%></span>
+            </div>
+          <%end%>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

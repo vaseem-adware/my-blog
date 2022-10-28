@@ -1,10 +1,18 @@
 <h1> List of Tags</h1>
+<%=form_for [:admin, @tag] do |f|%>
+	<div>
+		<%=f.label :Create_tags%><br>
+		<%=f.text_area :name%>
+	</div>
+	<%=f.submit%>
+<%end%>
 
 <table id="vaseem">
 	<tr>
 		<th>Tag Name</th>
 		<th>Created at</th>
-		
+		<th>Status</th>
+		<th>Actions</th>
 	</tr>
 	 <%@tags.each do |tag| %>
 		<tr>
@@ -14,7 +22,12 @@
 			<td>
 				<%=time_ago tag.created_at%>
 			</td>
-			
+			<td>
+				<%=status_converter tag.in_use?, truthy: "In use", falsy: "Not in use"%>
+			</td>
+			<td>
+				<%=link_to "Delete tag", admin_tag_path(tag), method: :delete %>
+			</td>	
 		</tr>
 	<%end%>
 </table>

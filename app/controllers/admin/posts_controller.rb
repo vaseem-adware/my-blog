@@ -1,9 +1,9 @@
 class Admin::PostsController < Admin::ApplicationController
-  before_action :get_post, only: [:show, :edit, :update]
+  before_action :get_post, only: [:edit, :update]
 
   def index
-    @posts = Post.all
-    @posts =Post.paginate(page: params[:page], per_page: 5)
+    @posts = Post.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    
   end
 
   def new
@@ -13,6 +13,7 @@ class Admin::PostsController < Admin::ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
+      flash[:notice] = "You have successfully created a post!"
       redirect_to admin_post_path(@post)
     else
       render "new"
@@ -20,6 +21,7 @@ class Admin::PostsController < Admin::ApplicationController
   end
 
   def show
+    @post = Post.friendly.find(params[:id])
     @tags = @post.tags
   end
 
@@ -27,6 +29,7 @@ class Admin::PostsController < Admin::ApplicationController
 
   def update
     if @post.update(post_params)
+      flash[:notice] = "You have successfully updated the post!"
       redirect_to admin_post_path(@post)
     else
       render "edit"
@@ -35,13 +38,13 @@ class Admin::PostsController < Admin::ApplicationController
   end
 
   def get_post
-    @post = Post.find(params[:id])
+   @post = Post.friendly.find(params[:id])
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :content,:user_id, tag_ids:[])
+    params.require(:post).permit(:title, :content, :intro, :user_id, :image, tag_ids:[])
   end
 
 end

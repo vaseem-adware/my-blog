@@ -1,24 +1,14 @@
-<h1> List of messages </h1>
-
-<table id="vaseem">
-	<tr>
-		<th>Message sender's Name</th>
-		<th>Created at</th>
-		<th>Action<th>
-	</tr>
+<h1>Messages(<%=@messages.count%>)</h1>
 	 <%@messages.each do |message| %>
-		<tr>
-			<td>
-				<%=message.full_name%>
-			</td>
-			<td>
-				<%=time_ago message.created_at%>
-			</td>
-			
-		  <td>
-		  	<%=link_to "Show message deatils", admin_message_path(message)%>
-		  </td>
-		</tr>
+		<div>
+			<b><%=message.full_name%></b><span> sent a message (<%=link_to "Show message deatils", admin_message_path(message)%>)</span>
+		</div>
+
+		<div>
+			<%=time_ago message.created_at%>
+		</div>
+		<br>
+		<hr>
+		<br>
 	<%end%>
-</table>
 <%= will_paginate @messages%>

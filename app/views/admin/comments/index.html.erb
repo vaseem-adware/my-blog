@@ -1,0 +1,19 @@
+<h1>Comments (<%=@comments.count%>)</h1>
+<%@comments.each do |comment|%>
+	<div>
+		<b><%=comment.full_name%></b> <span>commented on the post <%=link_to comment.post.title, admin_post_path(comment.post)%></span>
+		<p>"<%= comment.message%>"</p>
+	</div>
+	<div>
+		<%if comment.status%>
+			<%=link_to "Disapprove", comment_status_admin_comment_path(comment), method: "patch"%>
+	
+		<%else%>
+			<%=link_to "Approve", comment_status_admin_comment_path(comment), method: "patch"%>
+			<%=link_to "Delete", admin_comment_path(comment), method: "delete"%>
+		<%end%>
+	</div>
+	<br>
+  <hr>
+	<br>
+<%end%>

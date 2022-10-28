@@ -18,10 +18,10 @@ class Admin::ApplicationController < ActionController::Base
  
 	private
 
-	def logged_in
+	def logged_in #if you try to open the login form again,this method runs
 		if current_user 
 			flash[:notice] = "You are already logged in!"
-			redirect_to admin_user_path(current_user)
+			redirect_to admin_posts_path
 		end
 	end
 end

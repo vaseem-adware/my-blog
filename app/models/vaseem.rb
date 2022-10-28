@@ -1,2 +1,0 @@
-class Vaseem < ApplicationRecord
-end

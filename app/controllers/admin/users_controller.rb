@@ -17,6 +17,7 @@ class Admin::UsersController < Admin::ApplicationController
 	def create
 		@user = User.new(user_params)
 			if @user.save
+				flash[:notice] = "You have successfully created a user!"
 				redirect_to  admin_user_path(@user)
 			else
 				render "new"
@@ -31,6 +32,7 @@ class Admin::UsersController < Admin::ApplicationController
 	def update
 		@user = User.find(params[:id])
 		if @user.update(user_params)
+			flash[:notice] = "You have successfully updated the user!"
 			redirect_to admin_users_path
 		else
 			render :edit
@@ -40,7 +42,7 @@ class Admin::UsersController < Admin::ApplicationController
 	private
 
 		def user_params
-			params.require(:user).permit(:first_name,:last_name,:email,:about, :password)
+			params.require(:user).permit(:first_name,:last_name,:email,:about,:avatar, :password)
 		end
 
 end
